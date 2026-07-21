@@ -1,0 +1,820 @@
+/* ==========================================================================
+   GHOST RIDER - PREMIUM DESIGN SYSTEM & VARIABLES
+   ========================================================================== */
+:root {
+  /* Colors */
+  --bg-primary: #060608;
+  --bg-card: rgba(12, 12, 16, 0.65);
+  --border-card: rgba(255, 60, 0, 0.15);
+  --border-card-hover: rgba(255, 120, 0, 0.4);
+  
+  --color-orange: #ff5500;
+  --color-red: #ff1100;
+  --color-gold: #ffaa00;
+  --color-text-main: #f5f5f7;
+  --color-text-muted: #8e8e93;
+  
+  /* Fonts */
+  --font-header: 'Cinzel Decorative', Georgia, serif;
+  --font-body: 'Inter', sans-serif;
+  --font-accent: 'Syne', sans-serif;
+  
+  /* Shadows & Glows */
+  --glow-orange: 0 0 20px rgba(255, 85, 0, 0.4);
+  --glow-red: 0 0 20px rgba(255, 17, 0, 0.4);
+  --glow-gold: 0 0 25px rgba(255, 170, 0, 0.5);
+  
+  /* Transitions */
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   RESET & BODY SETUP
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--color-text-main);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: #1a1a24;
+  border-radius: 4px;
+  border: 2px solid var(--bg-primary);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-orange);
+  box-shadow: var(--glow-orange);
+}
+
+/* Selection */
+::selection {
+  background: var(--color-orange);
+  color: #fff;
+}
+
+/* ==========================================================================
+   CUSTOM INTERACTIVE CURSOR
+   ========================================================================== */
+.custom-cursor {
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: width 0.2s, height 0.2s;
+}
+
+.custom-cursor-glow {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-orange);
+  background: rgba(255, 85, 0, 0.05);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 15px rgba(255, 85, 0, 0.2);
+  transition: transform 0.08s ease-out, width 0.3s, height 0.3s;
+}
+
+/* Hover states for interactive elements */
+body.hovering .custom-cursor {
+  width: 16px;
+  height: 16px;
+  background: var(--color-orange);
+  mix-blend-mode: normal;
+}
+body.hovering .custom-cursor-glow {
+  width: 60px;
+  height: 60px;
+  border-color: var(--color-red);
+  background: rgba(255, 17, 0, 0.15);
+  box-shadow: var(--glow-red);
+}
+
+/* ==========================================================================
+   PARTICLES CANVAS
+   ========================================================================== */
+.particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1; /* Sits behind text, in front of background canvas */
+  pointer-events: none;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* ==========================================================================
+   PREMIUM PRELOADER
+   ========================================================================== */
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #030304;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: opacity 1s cubic-bezier(0.85, 0, 0.15, 1), visibility 1s;
+}
+
+.preloader-bg-glow {
+  position: absolute;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(255,85,0,0.15) 0%, rgba(0,0,0,0) 70%);
+  filter: blur(40px);
+  animation: fire-pulse 4s infinite alternate;
+}
+
+.preloader-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.preloader-title {
+  font-family: var(--font-header);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 900;
+  letter-spacing: 0.3em;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  margin-bottom: 5px;
+}
+
+.preloader-subtitle {
+  font-family: var(--font-accent);
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
+  letter-spacing: 0.5em;
+  color: var(--color-orange);
+  margin-bottom: 40px;
+  text-shadow: var(--glow-orange);
+}
+
+.fire-loader-container {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 30px;
+}
+
+.fire-glow {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,85,0,0.4) 0%, rgba(255,17,0,0.1) 50%, rgba(0,0,0,0) 100%);
+  filter: blur(10px);
+  animation: flame-flicker 0.15s infinite alternate;
+}
+
+.circular-progress-bar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.circular-progress-bar svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.circle-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.03);
+  stroke-width: 4;
+}
+
+.circle-progress {
+  fill: none;
+  stroke: url(#loaderGradient); /* SVG Gradient will be dynamically added or standard colored */
+  stroke: var(--color-orange);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 283;
+  transition: stroke-dashoffset 0.1s ease-out;
+  filter: drop-shadow(0 0 8px var(--color-orange));
+}
+
+.progress-percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-accent);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+.preloader-status {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+  height: 20px;
+}
+
+.preloader-hint {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ==========================================================================
+   CANVAS ELEMENT STYLING
+   ========================================================================== */
+.canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  background-color: #020202;
+}
+
+#sequenceCanvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: block;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* Subtle glow behind canvas content */
+.canvas-glow {
+  position: absolute;
+  width: 120vw;
+  height: 120vh;
+  top: -10vh;
+  left: -10vw;
+  background: radial-gradient(circle, rgba(255, 60, 0, 0.04) 0%, rgba(0,0,0,0) 80%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Vignette overlay for that cinematic look */
+.cinematic-vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.85);
+  background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.7) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.bottom-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25vh;
+  background: linear-gradient(to top, #060608 0%, rgba(6, 6, 8, 0) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   HUD HEADER & CONTROLS
+   ========================================================================== */
+.hud-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  pointer-events: none; /* Let clicks pass through except on active buttons */
+}
+
+.logo {
+  font-family: var(--font-header);
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  pointer-events: auto;
+}
+
+.hud-controls {
+  pointer-events: auto;
+}
+
+.hud-btn {
+  background: rgba(10, 10, 15, 0.5);
+  border: 1px solid var(--border-card);
+  border-radius: 50px;
+  color: var(--color-text-main);
+  padding: 10px 24px;
+  font-family: var(--font-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: var(--transition-fast);
+}
+
+.hud-btn:hover {
+  border-color: var(--color-orange);
+  box-shadow: 0 0 15px rgba(255, 85, 0, 0.2);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.hud-btn:active {
+  transform: translateY(0);
+}
+
+.sound-icon {
+  transition: transform 0.3s ease;
+}
+
+.hud-btn:hover .sound-icon {
+  transform: scale(1.1);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+   HUD SIDE NAVIGATION INDICATOR
+   ========================================================================== */
+.hud-nav {
+  position: fixed;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 100;
+}
+
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition-fast);
+}
+
+.nav-dot::after {
+  content: attr(data-label);
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%) translateX(10px);
+  opacity: 0;
+  color: var(--color-text-muted);
+  font-family: var(--font-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: var(--transition-smooth);
+}
+
+.nav-dot:hover::after,
+.nav-dot.active::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+.nav-dot:hover {
+  background: rgba(255,255,255,0.6);
+  transform: scale(1.2);
+}
+
+.nav-dot.active {
+  background: var(--color-orange);
+  box-shadow: var(--glow-orange), 0 0 0 4px rgba(255, 85, 0, 0.2);
+  transform: scale(1.3);
+}
+
+.nav-dot.active::after {
+  color: #fff;
+  text-shadow: 0 0 5px rgba(255,85,0,0.5);
+}
+
+/* ==========================================================================
+   SCROLL PROGRESS BAR
+   ========================================================================== */
+.scroll-progress-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.03);
+  z-index: 101;
+}
+
+.scroll-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(to right, var(--color-red), var(--color-orange), var(--color-gold));
+  box-shadow: 0 0 10px var(--color-orange);
+  transition: width 0.12s linear;
+}
+
+/* ==========================================================================
+   SCROLL PROMPT
+   ========================================================================== */
+.scroll-prompt {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-prompt.fade-out {
+  opacity: 0;
+}
+
+.scroll-prompt-text {
+  font-family: var(--font-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--color-text-muted);
+}
+
+.scroll-prompt-arrow {
+  color: var(--color-orange);
+  animation: arrow-bounce 1.5s infinite;
+  filter: drop-shadow(var(--glow-orange));
+}
+
+/* ==========================================================================
+   SCROLL LAYOUT & MAIN TRACK
+   ========================================================================== */
+.scroll-wrapper {
+  position: relative;
+  width: 100%;
+  z-index: 10; /* Text sits on top of sticky canvas */
+  pointer-events: none; /* Let wheel scrolls fall through */
+}
+
+.scroll-section {
+  width: 100%;
+  padding: 0 10%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  /* Height set inline or individually to create the scrolling length */
+}
+
+/* Inner contents that should capture clicks */
+.section-content {
+  pointer-events: auto;
+  max-width: 600px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Trigger states via Javascript intersection observer */
+.section-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Layout Orientations */
+.section-content.left {
+  margin-right: auto;
+}
+
+.section-content.right {
+  margin-left: auto;
+}
+
+.section-content.center {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 750px;
+}
+
+/* Content Elements Styling */
+.badge {
+  display: inline-block;
+  font-family: var(--font-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding: 6px 16px;
+  border-radius: 4px;
+  background: rgba(255, 85, 0, 0.08);
+  border: 1px solid rgba(255, 85, 0, 0.15);
+}
+
+.glow-text-orange {
+  color: var(--color-orange);
+  border-color: rgba(255, 85, 0, 0.2);
+  text-shadow: var(--glow-orange);
+}
+
+.glow-text-red {
+  color: #ff3333;
+  border-color: rgba(255, 17, 0, 0.2);
+  background: rgba(255, 17, 0, 0.08);
+  text-shadow: var(--glow-red);
+}
+
+.glow-text-gold {
+  color: var(--color-gold);
+  border-color: rgba(255, 170, 0, 0.2);
+  background: rgba(255, 170, 0, 0.08);
+  text-shadow: var(--glow-gold);
+}
+
+h1.glitch-title {
+  font-family: var(--font-header);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+  margin-bottom: 25px;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255,255,255,0.1), 0 0 80px rgba(255,85,0,0.25);
+  position: relative;
+}
+
+h2 {
+  font-family: var(--font-header);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  margin-bottom: 30px;
+  color: #fff;
+  text-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+.section-lead {
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  line-height: 1.6;
+  font-weight: 300;
+  color: var(--color-text-main);
+  opacity: 0.9;
+  margin-bottom: 35px;
+}
+
+/* Glassmorphism Card Style */
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: var(--transition-smooth);
+}
+
+.glass-card:hover {
+  border-color: var(--border-card-hover);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 15px rgba(255,85,0,0.08);
+}
+
+.glass-card p {
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.glass-card .quote {
+  font-family: var(--font-accent);
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  font-weight: 700;
+  line-height: 1.5;
+  color: #fff;
+  margin-bottom: 25px;
+  border-left: 3px solid var(--color-orange);
+  padding-left: 20px;
+  text-shadow: 0 0 10px rgba(255,85,0,0.15);
+}
+
+.interactive-glow-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255,255,255,0.1);
+  padding: 20px 30px;
+  border-radius: 8px;
+  display: inline-block;
+  transition: var(--transition-fast);
+}
+
+.interactive-glow-box:hover {
+  border-color: var(--color-orange);
+  background: rgba(255, 85, 0, 0.02);
+}
+
+.interactive-glow-box p {
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+.feature-tags {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-family: var(--font-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 6px 14px;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--color-text-muted);
+}
+
+/* Call to Action Button */
+.action-btn {
+  background: none;
+  border: none;
+  padding: 16px 36px;
+  font-family: var(--font-accent);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+
+.btn-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--color-red), var(--color-orange));
+  border-radius: 50px;
+  z-index: 1;
+  box-shadow: var(--glow-orange);
+  transition: var(--transition-smooth);
+}
+
+.action-btn:hover .btn-glow {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px rgba(255,85,0,0.6);
+  background: linear-gradient(45deg, var(--color-orange), var(--color-gold));
+}
+
+.btn-text {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+@keyframes fire-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 0.95;
+  }
+}
+
+@keyframes flame-flicker {
+  0% {
+    transform: scale(1) rotate(0deg);
+    filter: blur(10px) brightness(1);
+  }
+  50% {
+    transform: scale(1.05) rotate(2deg);
+    filter: blur(11px) brightness(1.2);
+  }
+  100% {
+    transform: scale(0.95) rotate(-2deg);
+    filter: blur(9px) brightness(0.9);
+  }
+}
+
+@keyframes arrow-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDES
+   ========================================================================== */
+@media (max-width: 900px) {
+  .hud-nav {
+    display: none; /* Hide side dots on tablets and phones for clean screen space */
+  }
+  .hud-btn-text {
+    display: none; /* Hide button text, icons only */
+  }
+  .hud-btn {
+    padding: 10px;
+  }
+  .scroll-section {
+    padding: 0 5%;
+  }
+  .glass-card {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section-content {
+    max-width: 100%;
+  }
+  .glass-card {
+    background: rgba(12, 12, 16, 0.85); /* Slightly darker cards on small screens for readability */
+  }
+}

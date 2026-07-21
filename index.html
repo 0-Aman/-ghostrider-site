@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ghost Rider: Spirit of Vengeance | Scroll Experience</title>
+  <meta name="description" content="An interactive, high-performance scroll-driven canvas image sequence highlighting the legend of the Ghost Rider. Fully preloaded and optimized for 60 FPS.">
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@300;400;600;800&family=Syne:wght@600;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Smooth scroll helper if supported -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor Glow -->
+  <div class="custom-cursor" id="customCursor"></div>
+  <div class="custom-cursor-glow" id="cursorGlow"></div>
+
+  <!-- Ambient Particle Canvas Overlay -->
+  <canvas class="particles-canvas" id="particlesCanvas"></canvas>
+
+  <!-- Premium Preloader Screen -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-bg-glow"></div>
+    <div class="preloader-content">
+      <div class="preloader-title">GHOST RIDER</div>
+      <div class="preloader-subtitle">SPIRIT OF VENGEANCE</div>
+      
+      <div class="fire-loader-container">
+        <div class="fire-glow"></div>
+        <div class="circular-progress-bar">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" class="circle-bg"></circle>
+            <circle cx="50" cy="50" r="45" class="circle-progress" id="progressCircle"></circle>
+          </svg>
+          <div class="progress-percentage" id="progressText">0%</div>
+        </div>
+      </div>
+      
+      <div class="preloader-status" id="preloaderStatus">Sparking the ignition...</div>
+      <button class="action-btn hidden" id="enterBtn" style="margin-top: 10px; margin-bottom: 20px;">
+        <span class="btn-glow"></span>
+        <span class="btn-text">IGNITE RIDE</span>
+      </button>
+      <div class="preloader-hint" id="preloaderHint">For the best experience, scroll to control the ride.</div>
+    </div>
+  </div>
+
+  <!-- Sticky Canvas Container -->
+  <div class="canvas-container">
+    <div class="canvas-glow"></div>
+    <canvas id="sequenceCanvas"></canvas>
+    <!-- Vignette overlay for cinematic depth -->
+    <div class="cinematic-vignette"></div>
+    <div class="bottom-gradient"></div>
+  </div>
+
+  <!-- Header HUD -->
+  <header class="hud-header">
+    <div class="logo">GHOST RIDER</div>
+  </header>
+
+  <!-- Side Navigation Indicator -->
+  <nav class="hud-nav" id="sideNav">
+    <div class="nav-dot active" data-target="0" data-label="Ignition"></div>
+    <div class="nav-dot" data-target="1" data-label="The Bargain"></div>
+    <div class="nav-dot" data-target="2" data-label="Hellfire Unleashed"></div>
+    <div class="nav-dot" data-target="3" data-label="Penance Stare"></div>
+    <div class="nav-dot" data-target="4" data-label="Vengeance"></div>
+  </nav>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress-container">
+    <div class="scroll-progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Scroll Prompt -->
+  <div class="scroll-prompt" id="scrollPrompt">
+    <div class="scroll-prompt-text">SCROLL TO RIDE</div>
+    <div class="scroll-prompt-arrow">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Scrollable Tracks/Story Sections -->
+  <main class="scroll-wrapper">
+    <!-- Section 1: Intro (Ignition) -->
+    <section class="scroll-section" id="section-0" style="height: 150vh;">
+      <div class="section-content center">
+        <div class="badge glow-text-orange">CHAPTER I</div>
+        <h1 class="glitch-title">HELL ON WHEELS</h1>
+        <p class="section-lead">A stunt rider bound to the underworld, Johnny Blaze rides as the Spirit of Vengeance.</p>
+        <div class="interactive-glow-box">
+          <p>Scroll down to initiate the transformation and unleash the Hellfire.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: The Bargain -->
+    <section class="scroll-section" id="section-1" style="height: 180vh;">
+      <div class="section-content left">
+        <div class="badge glow-text-red">CHAPTER II</div>
+        <h2>THE DEMON'S BARGAIN</h2>
+        <div class="glass-card">
+          <p class="quote">"Your soul is mine, Johnny Blaze. In return, your father lives... for now."</p>
+          <p>A deal signed in blood under the shadow of death. When you sell your soul to Mephisto, there are no refunds, only eternal service as the devil's bounty hunter.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Hellfire Unleashed -->
+    <section class="scroll-section" id="section-2" style="height: 180vh;">
+      <div class="section-content right">
+        <div class="badge glow-text-orange">CHAPTER III</div>
+        <h2>HELLFIRE UNLEASHED</h2>
+        <div class="glass-card">
+          <p>From the depths of Hades, the Hellfire burns not the flesh, but the soul. The motorcycle becomes a mechanical beast of fire, leaving paths of molten glass and ash.</p>
+          <div class="feature-tags">
+            <span class="tag">SPIRIT OF VENGEANCE</span>
+            <span class="tag">HELLFIRE CYCLE</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Penance Stare -->
+    <section class="scroll-section" id="section-3" style="height: 180vh;">
+      <div class="section-content left">
+        <div class="badge glow-text-red">CHAPTER IV</div>
+        <h2>THE PENANCE STARE</h2>
+        <div class="glass-card">
+          <p class="quote">"Look into my eyes. Feel the pain of a thousand sins."</p>
+          <p>The ultimate weapon. The Ghost Rider forces his victims to feel all the pain, suffering, and misery they have ever inflicted on others, consuming their souls from within.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Outro (Vengeance) -->
+    <section class="scroll-section" id="section-4" style="height: 150vh;">
+      <div class="section-content center">
+        <div class="badge glow-text-gold">EPILOGUE</div>
+        <h2>THE ETERNAL RIDE</h2>
+        <p class="section-lead">Bound to the road, hunting the wicked. The Spirit of Vengeance never rests.</p>
+        <button class="action-btn" id="restartBtn">
+          <span class="btn-glow"></span>
+          <span class="btn-text">RIDE AGAIN</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
